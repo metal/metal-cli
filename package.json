@@ -1,7 +1,7 @@
 {
   "name": "metal-cli",
   "version": "0.0.0",
-  "description": "Command line tools for metal (e.g. build, test, lint)",
+  "description": "Command line tools for metal (e.g. build)",
   "license": "BSD",
   "repository": "metal/metal-cli",
   "author": {

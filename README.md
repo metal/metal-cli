@@ -1,3 +1,3 @@
 # metal-cli
 
-Command line tools for metal (e.g. build, test, lint).
+Command line tools for metal (e.g. build).
