@@ -24,9 +24,8 @@
   ],
   "dependencies": {
     "chalk": "^1.1.1",
-    "metal-tools-build-amd": "mairatma/metal-tools-build-amd",
+    "merge": "^1.2.0",
     "metal-tools-build-globals": "mairatma/metal-tools-build-globals",
-    "metal-tools-build-jquery": "mairatma/metal-tools-build-jquery",
     "metal-tools-soy": "mairatma/metal-tools-soy",
     "require-dir": "^0.3.0",
     "yargs": "^3.30.0"

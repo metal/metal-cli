@@ -4,12 +4,12 @@ var chalk = require('chalk');
 var Command = require('./lib/Command');
 var requireDir = require('require-dir');
 
-requireDir('./lib/commands');
+requireDir('./lib/commands', {recurse: true});
 
 var command = Command.get();
 if (command) {
   console.info('Running ' + chalk.cyan('\'' + command.name + '\'') + '...');
-  command.run(Command.getArgv()).on('end', function() {
+  command.run(Command.getArgv(), function() {
     console.info('Finished ' + chalk.cyan('\'' + command.name + '\'') + '...');
     process.exit(0);
   });
