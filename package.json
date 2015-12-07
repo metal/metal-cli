@@ -16,7 +16,7 @@
   },
   "scripts": {
     "lint": "jshint index.js",
-    "test": "mocha test/*.js"
+    "test": "mocha test/*.js --slow 1000 --timeout 3000"
   },
   "keywords": [
     "cli",
@@ -24,11 +24,15 @@
   ],
   "dependencies": {
     "chalk": "^1.1.1",
-    "gulp": "^3.9.0",
-    "gulp-metal": "^0.7.0",
+    "metal-tools-build-amd": "mairatma/metal-tools-build-amd",
+    "metal-tools-build-globals": "mairatma/metal-tools-build-globals",
+    "metal-tools-build-jquery": "mairatma/metal-tools-build-jquery",
+    "metal-tools-soy": "mairatma/metal-tools-soy",
+    "require-dir": "^0.3.0",
     "yargs": "^3.30.0"
   },
   "devDependencies": {
+    "del": "^2.2.0",
     "jshint": "^2.7.0",
     "mocha": "^2.2.5",
     "sinon": "^1.14.1"

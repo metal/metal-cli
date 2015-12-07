@@ -1,21 +1,19 @@
 'use strict';
 
 var chalk = require('chalk');
-var gulp = require('gulp');
-var metal = require('gulp-metal');
-var yargs = require('yargs');
+var Command = require('./lib/Command');
+var requireDir = require('require-dir');
 
-var argv = yargs
-  .demand(1, 1)
-  .argv;
+requireDir('./lib/commands');
 
-metal.registerTasks(argv);
-
-console.log('Starting ' + chalk.cyan('\'' + argv._[0] + '\'') + '...');
-gulp.start(argv._[0], function(error) {
-  if (error) {
-    throw error;
-  } else {
-    console.log('Finished ' + chalk.cyan('\'' + argv._[0] + '\''));
-  }
-});
+var command = Command.get();
+if (command) {
+  console.info('Running ' + chalk.cyan('\'' + command.name + '\'') + '...');
+  command.run(Command.getArgv()).on('end', function() {
+    console.info('Finished ' + chalk.cyan('\'' + command.name + '\'') + '...');
+    process.exit(0);
+  });
+} else {
+  console.warn(chalk.red('Error: ') + 'Invalid command ' + chalk.cyan('\'' + Command.getName() + '\''));
+  process.exit(1);
+}
