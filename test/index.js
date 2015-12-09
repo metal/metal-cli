@@ -39,7 +39,7 @@ describe('Metal CLI', function() {
         ]
       ).on('close', function(code) {
         assert.strictEqual(0, code);
-        assert.ok(fs.readFileSync('test/fixtures/src/Foo.soy.js'));
+        assert.ok(fs.existsSync('test/fixtures/src/Foo.soy.js'));
         done();
       });
     });
@@ -59,7 +59,7 @@ describe('Metal CLI', function() {
         ]
       ).on('close', function(code) {
         assert.strictEqual(0, code);
-        assert.ok(fs.readFileSync('test/fixtures/build/globals/metal.js'));
+        assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js'));
         done();
       });
     });
@@ -79,7 +79,30 @@ describe('Metal CLI', function() {
         ]
       ).on('close', function(code) {
         assert.strictEqual(0, code);
-        assert.ok(fs.readFileSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js'));
+        assert.ok(fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js'));
+        done();
+      });
+    });
+
+    it('should build js files to "amd-jquery" format when "build" command is run for it', function(done) {
+      childProcess.spawn(
+        'node',
+        [
+          'index.js',
+          'build',
+          '-f',
+          'amd-jquery',
+          '-s',
+          'test/fixtures/src/**/*.js',
+          '-d',
+          'test/fixtures/build/amd-jquery'
+        ]
+      ).on('close', function(code) {
+        assert.strictEqual(0, code);
+        assert.ok(fs.existsSync('test/fixtures/build/amd-jquery/metal/test/fixtures/src/Foo.js'));
+
+        var contents = fs.readFileSync('test/fixtures/build/amd-jquery/metal/test/fixtures/src/Foo.js', 'utf8');
+        assert.notStrictEqual(-1, contents.indexOf('_JQueryAdapter2.default.register(\'foo\', Foo);'));
         done();
       });
     });

@@ -29,6 +29,8 @@
     "metal-tools-build-globals": "mairatma/metal-tools-build-globals",
     "metal-tools-soy": "mairatma/metal-tools-soy",
     "require-dir": "^0.3.0",
+    "stream-consume": "^0.1.0",
+    "vinyl-fs": "^2.2.1",
     "yargs": "^3.30.0"
   },
   "devDependencies": {
