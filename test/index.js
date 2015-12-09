@@ -106,5 +106,28 @@ describe('Metal CLI', function() {
         done();
       });
     });
+
+    it('should build js files to "jquery" format when "build" command is run for it', function(done) {
+      childProcess.spawn(
+        'node',
+        [
+          'index.js',
+          'build',
+          '-f',
+          'jquery',
+          '-s',
+          'test/fixtures/src/**/*.js',
+          '-d',
+          'test/fixtures/build/jquery'
+        ]
+      ).on('close', function(code) {
+        assert.strictEqual(0, code);
+        assert.ok(fs.existsSync('test/fixtures/build/jquery/metal.js'));
+
+        var contents = fs.readFileSync('test/fixtures/build/jquery/metal.js', 'utf8');
+        assert.notStrictEqual(-1, contents.indexOf('JQueryAdapter.register(\'foo\', Foo);'));
+        done();
+      });
+    });
   });
 });
