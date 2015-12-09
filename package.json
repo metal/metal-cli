@@ -25,6 +25,7 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "merge": "^1.2.0",
+    "metal-tools-build-amd": "github:mairatma/metal-tools-build-amd",
     "metal-tools-build-globals": "mairatma/metal-tools-build-globals",
     "metal-tools-soy": "mairatma/metal-tools-soy",
     "require-dir": "^0.3.0",

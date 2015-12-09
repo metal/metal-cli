@@ -63,5 +63,25 @@ describe('Metal CLI', function() {
         done();
       });
     });
+
+    it('should build js files to "amd" format when "build" command is run for it', function(done) {
+      childProcess.spawn(
+        'node',
+        [
+          'index.js',
+          'build',
+          '-f',
+          'amd',
+          '-s',
+          'test/fixtures/src/**/*.js',
+          '-d',
+          'test/fixtures/build/amd'
+        ]
+      ).on('close', function(code) {
+        assert.strictEqual(0, code);
+        assert.ok(fs.readFileSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js'));
+        done();
+      });
+    });
   });
 });
