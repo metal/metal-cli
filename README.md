@@ -10,6 +10,8 @@ $ npm install --global metal-cli
 
 ## Commands
 
+You can see information about each supported command by typing `$ metal --help` in the command line. Below you'll find some of that info too.
+
 ### build
 
 ```sh
