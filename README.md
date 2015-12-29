@@ -20,6 +20,14 @@ $ metal build
 
 Builds Metal.js code, compiling soy files and transpiling ES6 to ES5 for example. The default output format is **globals**, but that can be be changed via params, just like many other options. For more details, run `$ metal build --help`.
 
+### watch
+
+```sh
+$ metal watch
+```
+
+Watches soy and js files, building them when they change. The default output format is **globals**, but that can be be changed via params, just like many other options. For more details, run `$ metal watch --help`.
+
 ### soy
 
 ```sh
