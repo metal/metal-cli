@@ -60,6 +60,7 @@ describe('Metal CLI', function() {
       ).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js'));
+        assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js.map'));
         done();
       });
     });
@@ -80,6 +81,7 @@ describe('Metal CLI', function() {
       ).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js'));
+        assert.ok(fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js.map'));
         done();
       });
     });
@@ -100,6 +102,7 @@ describe('Metal CLI', function() {
       ).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/build/amd-jquery/metal/test/fixtures/src/Foo.js'));
+        assert.ok(fs.existsSync('test/fixtures/build/amd-jquery/metal/test/fixtures/src/Foo.js.map'));
 
         var contents = fs.readFileSync('test/fixtures/build/amd-jquery/metal/test/fixtures/src/Foo.js', 'utf8');
         assert.notStrictEqual(-1, contents.indexOf('_JQueryAdapter2.default.register(\'foo\', Foo);'));
@@ -123,9 +126,62 @@ describe('Metal CLI', function() {
       ).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/build/jquery/metal.js'));
+        assert.ok(fs.existsSync('test/fixtures/build/jquery/metal.js.map'));
 
         var contents = fs.readFileSync('test/fixtures/build/jquery/metal.js', 'utf8');
         assert.notStrictEqual(-1, contents.indexOf('JQueryAdapter.register(\'foo\', Foo);'));
+        done();
+      });
+    });
+
+    it('should build js files to multiple formats when "build" command requests it', function(done) {
+      childProcess.spawn(
+        'node',
+        [
+          'index.js',
+          'build',
+          '-f',
+          'globals',
+          'amd',
+          '-s',
+          'test/fixtures/src/**/*.js',
+          '-d',
+          'test/fixtures/build/globals',
+          'test/fixtures/build/amd'
+        ]
+      ).on('close', function(code) {
+        assert.strictEqual(0, code);
+        assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js'));
+        assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js.map'));
+        assert.ok(fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js'));
+        assert.ok(fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js.map'));
+        done();
+      });
+    });
+
+    it('should build js files without generating source maps when --sourceMaps is set to false', function(done) {
+      childProcess.spawn(
+        'node',
+        [
+          'index.js',
+          'build',
+          '-f',
+          'globals',
+          'amd',
+          '-s',
+          'test/fixtures/src/**/*.js',
+          '-d',
+          'test/fixtures/build/globals',
+          'test/fixtures/build/amd',
+          '--sourceMaps',
+          'false'
+        ]
+      ).on('close', function(code) {
+        assert.strictEqual(0, code);
+        assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js'));
+        assert.ok(!fs.existsSync('test/fixtures/build/globals/metal.js.map'));
+        assert.ok(fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js'));
+        assert.ok(!fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js.map'));
         done();
       });
     });
