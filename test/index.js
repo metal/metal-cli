@@ -40,6 +40,9 @@ describe('Metal CLI', function() {
       ).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/src/Foo.soy.js'));
+
+        var contents = fs.readFileSync('test/fixtures/src/Foo.soy.js');
+        assert.notStrictEqual(-1, contents.indexOf('extends Component'));
         done();
       });
     });
@@ -182,6 +185,57 @@ describe('Metal CLI', function() {
         assert.ok(!fs.existsSync('test/fixtures/build/globals/metal.js.map'));
         assert.ok(fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js'));
         assert.ok(!fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js.map'));
+        done();
+      });
+    });
+
+    it('should build soy files when "build" command is run', function(done) {
+      childProcess.spawn(
+        'node',
+        [
+          'index.js',
+          'build',
+          '--src',
+          'test/fixtures/src/**/*.js',
+          '--dest',
+          'test/fixtures/build/globals',
+          '--soySrc',
+          'test/fixtures/src/**/*.soy',
+          '--soyDest',
+          'test/fixtures/src'
+        ]
+      ).on('close', function(code) {
+        assert.strictEqual(0, code);
+        assert.ok(fs.existsSync('test/fixtures/src/Foo.soy.js'));
+
+        var contents = fs.readFileSync('test/fixtures/src/Foo.soy.js', 'utf8');
+        assert.notStrictEqual(-1, contents.indexOf('extends Component'));
+        done();
+      });
+    });
+
+    it('should build soy files without generating component when soySkipMetalGeneration is passed', function(done) {
+      childProcess.spawn(
+        'node',
+        [
+          'index.js',
+          'build',
+          '--src',
+          'test/fixtures/src/**/*.js',
+          '--dest',
+          'test/fixtures/build/globals',
+          '--soySrc',
+          'test/fixtures/src/**/*.soy',
+          '--soyDest',
+          'test/fixtures/src',
+          '--soySkipMetalGeneration'
+        ]
+      ).on('close', function(code) {
+        assert.strictEqual(0, code);
+        assert.ok(fs.existsSync('test/fixtures/src/Foo.soy.js'));
+
+        var contents = fs.readFileSync('test/fixtures/src/Foo.soy.js', 'utf8');
+        assert.strictEqual(-1, contents.indexOf('extends Component'));
         done();
       });
     });
