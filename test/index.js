@@ -16,10 +16,7 @@ describe('Metal CLI', function() {
   });
 
   it('should exit with error when invalid command is given', function(done) {
-    childProcess.spawn(
-      'node',
-      ['index.js', 'invalid']
-    ).on('close', function(code) {
+    runMetal(['invalid']).on('close', function(code) {
       assert.strictEqual(1, code);
       done();
     });
@@ -27,17 +24,13 @@ describe('Metal CLI', function() {
 
   describe('Soy', function() {
     it('should compile soy files when "soy" command is run', function(done) {
-      childProcess.spawn(
-        'node',
-        [
-          'index.js',
-          'soy',
-          '-s',
-          'test/fixtures/src/**/*.soy',
-          '-d',
-          'test/fixtures/src'
-        ]
-      ).on('close', function(code) {
+      runMetal([
+        'soy',
+        '-s',
+        'test/fixtures/src/**/*.soy',
+        '-d',
+        'test/fixtures/src'
+      ]).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/src/Foo.soy.js'));
 
@@ -50,17 +43,13 @@ describe('Metal CLI', function() {
 
   describe('Build', function() {
     it('should build js files to "globals" format when "build" command is run', function(done) {
-      childProcess.spawn(
-        'node',
-        [
-          'index.js',
-          'build',
-          '-s',
-          'test/fixtures/src/**/*.js',
-          '-d',
-          'test/fixtures/build/globals'
-        ]
-      ).on('close', function(code) {
+      runMetal([
+        'build',
+        '-s',
+        'test/fixtures/src/**/*.js',
+        '-d',
+        'test/fixtures/build/globals'
+      ]).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js'));
         assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js.map'));
@@ -69,19 +58,15 @@ describe('Metal CLI', function() {
     });
 
     it('should build js files to "amd" format when "build" command is run for it', function(done) {
-      childProcess.spawn(
-        'node',
-        [
-          'index.js',
-          'build',
-          '-f',
-          'amd',
-          '-s',
-          'test/fixtures/src/**/*.js',
-          '-d',
-          'test/fixtures/build/amd'
-        ]
-      ).on('close', function(code) {
+      runMetal([
+        'build',
+        '-f',
+        'amd',
+        '-s',
+        'test/fixtures/src/**/*.js',
+        '-d',
+        'test/fixtures/build/amd'
+      ]).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js'));
         assert.ok(fs.existsSync('test/fixtures/build/amd/metal/test/fixtures/src/Foo.js.map'));
@@ -90,19 +75,15 @@ describe('Metal CLI', function() {
     });
 
     it('should build js files to "amd-jquery" format when "build" command is run for it', function(done) {
-      childProcess.spawn(
-        'node',
-        [
-          'index.js',
-          'build',
-          '-f',
-          'amd-jquery',
-          '-s',
-          'test/fixtures/src/**/*.js',
-          '-d',
-          'test/fixtures/build/amd-jquery'
-        ]
-      ).on('close', function(code) {
+      runMetal([
+        'build',
+        '-f',
+        'amd-jquery',
+        '-s',
+        'test/fixtures/src/**/*.js',
+        '-d',
+        'test/fixtures/build/amd-jquery'
+      ]).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/build/amd-jquery/metal/test/fixtures/src/Foo.js'));
         assert.ok(fs.existsSync('test/fixtures/build/amd-jquery/metal/test/fixtures/src/Foo.js.map'));
@@ -114,19 +95,15 @@ describe('Metal CLI', function() {
     });
 
     it('should build js files to "jquery" format when "build" command is run for it', function(done) {
-      childProcess.spawn(
-        'node',
-        [
-          'index.js',
-          'build',
-          '-f',
-          'jquery',
-          '-s',
-          'test/fixtures/src/**/*.js',
-          '-d',
-          'test/fixtures/build/jquery'
-        ]
-      ).on('close', function(code) {
+      runMetal([
+        'build',
+        '-f',
+        'jquery',
+        '-s',
+        'test/fixtures/src/**/*.js',
+        '-d',
+        'test/fixtures/build/jquery'
+      ]).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/build/jquery/metal.js'));
         assert.ok(fs.existsSync('test/fixtures/build/jquery/metal.js.map'));
@@ -138,21 +115,17 @@ describe('Metal CLI', function() {
     });
 
     it('should build js files to multiple formats when "build" command requests it', function(done) {
-      childProcess.spawn(
-        'node',
-        [
-          'index.js',
-          'build',
-          '-f',
-          'globals',
-          'amd',
-          '-s',
-          'test/fixtures/src/**/*.js',
-          '-d',
-          'test/fixtures/build/globals',
-          'test/fixtures/build/amd'
-        ]
-      ).on('close', function(code) {
+      runMetal([
+        'build',
+        '-f',
+        'globals',
+        'amd',
+        '-s',
+        'test/fixtures/src/**/*.js',
+        '-d',
+        'test/fixtures/build/globals',
+        'test/fixtures/build/amd'
+      ]).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js'));
         assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js.map'));
@@ -163,23 +136,19 @@ describe('Metal CLI', function() {
     });
 
     it('should build js files without generating source maps when --sourceMaps is set to false', function(done) {
-      childProcess.spawn(
-        'node',
-        [
-          'index.js',
-          'build',
-          '-f',
-          'globals',
-          'amd',
-          '-s',
-          'test/fixtures/src/**/*.js',
-          '-d',
-          'test/fixtures/build/globals',
-          'test/fixtures/build/amd',
-          '--sourceMaps',
-          'false'
-        ]
-      ).on('close', function(code) {
+      runMetal([
+        'build',
+        '-f',
+        'globals',
+        'amd',
+        '-s',
+        'test/fixtures/src/**/*.js',
+        '-d',
+        'test/fixtures/build/globals',
+        'test/fixtures/build/amd',
+        '--sourceMaps',
+        'false'
+      ]).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/build/globals/metal.js'));
         assert.ok(!fs.existsSync('test/fixtures/build/globals/metal.js.map'));
@@ -190,21 +159,17 @@ describe('Metal CLI', function() {
     });
 
     it('should build soy files when "build" command is run', function(done) {
-      childProcess.spawn(
-        'node',
-        [
-          'index.js',
-          'build',
-          '--src',
-          'test/fixtures/src/**/*.js',
-          '--dest',
-          'test/fixtures/build/globals',
-          '--soySrc',
-          'test/fixtures/src/**/*.soy',
-          '--soyDest',
-          'test/fixtures/src'
-        ]
-      ).on('close', function(code) {
+      runMetal([
+        'build',
+        '--src',
+        'test/fixtures/src/**/*.js',
+        '--dest',
+        'test/fixtures/build/globals',
+        '--soySrc',
+        'test/fixtures/src/**/*.soy',
+        '--soyDest',
+        'test/fixtures/src'
+      ]).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/src/Foo.soy.js'));
 
@@ -215,22 +180,18 @@ describe('Metal CLI', function() {
     });
 
     it('should build soy files without generating component when soySkipMetalGeneration is passed', function(done) {
-      childProcess.spawn(
-        'node',
-        [
-          'index.js',
-          'build',
-          '--src',
-          'test/fixtures/src/**/*.js',
-          '--dest',
-          'test/fixtures/build/globals',
-          '--soySrc',
-          'test/fixtures/src/**/*.soy',
-          '--soyDest',
-          'test/fixtures/src',
-          '--soySkipMetalGeneration'
-        ]
-      ).on('close', function(code) {
+      runMetal([
+        'build',
+        '--src',
+        'test/fixtures/src/**/*.js',
+        '--dest',
+        'test/fixtures/build/globals',
+        '--soySrc',
+        'test/fixtures/src/**/*.soy',
+        '--soyDest',
+        'test/fixtures/src',
+        '--soySkipMetalGeneration'
+      ]).on('close', function(code) {
         assert.strictEqual(0, code);
         assert.ok(fs.existsSync('test/fixtures/src/Foo.soy.js'));
 
@@ -241,3 +202,7 @@ describe('Metal CLI', function() {
     });
   });
 });
+
+function runMetal(args) {
+  return childProcess.spawn('node', ['index.js'].concat(args));
+}
