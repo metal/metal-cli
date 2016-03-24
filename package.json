@@ -1,6 +1,6 @@
 {
   "name": "metal-cli",
-  "version": "0.5.3",
+  "version": "1.0.0",
   "description": "Command line tools for metal (e.g. build)",
   "license": "BSD",
   "repository": "metal/metal-cli",
