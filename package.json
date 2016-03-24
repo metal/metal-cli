@@ -29,7 +29,7 @@
     "metal-tools-build-amd": "^2.1.0",
     "metal-tools-build-globals": "^1.1.0",
     "metal-tools-build-jquery": "^1.1.0",
-    "metal-tools-soy": "^1.0.0",
+    "metal-tools-soy": "^2.0.0",
     "require-dir": "^0.3.0",
     "stream-consume": "^0.1.0",
     "vinyl-fs": "^2.2.1",
