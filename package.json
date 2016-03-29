@@ -16,7 +16,7 @@
   },
   "scripts": {
     "lint": "jshint index.js",
-    "test": "mocha test/*.js --slow 1000 --timeout 3000"
+    "test": "mocha test/*.js --slow 1000 --timeout 5000"
   },
   "keywords": [
     "cli",
