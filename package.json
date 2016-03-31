@@ -1,57 +1,57 @@
 {
-    "name": "metal-cli",
-    "version": "1.0.2",
-    "description": "Command line tools for metal (e.g. build)",
-    "license": "BSD",
-    "repository": "metal/metal-cli",
-    "author": {
-        "name": "Maira Bello",
-        "email": "maira.araujo@liferay.com"
-    },
-    "engines": {
-        "node": ">=0.12.0"
-    },
-    "bin": {
-        "metal": "./index.js"
-    },
-    "scripts": {
-        "lint": "jshint index.js",
-        "test": "mocha test/*.js --slow 1000 --timeout 5000"
-    },
-    "keywords": [
-        "cli",
-        "metal"
-    ],
-    "dependencies": {
-        "chalk": "^1.1.1",
-        "glob-watcher": "^2.0.0",
-        "merge": "^1.2.0",
-        "metal-tools-build-amd": "^3.0.0",
-        "metal-tools-build-globals": "^2.0.0",
-        "metal-tools-build-jquery": "^2.0.0",
-        "metal-tools-soy": "^2.0.0",
-        "require-dir": "^0.3.0",
-        "stream-consume": "^0.1.0",
-        "vinyl-fs": "^2.2.1",
-        "yargs": "^3.30.0"
-    },
-    "devDependencies": {
-        "del": "^2.2.0",
-        "jshint": "^2.7.0",
-        "mocha": "^2.2.5",
-        "sinon": "^1.14.1"
-    },
-    "bundledDependencies": [
-        "chalk",
-        "glob-watcher",
-        "merge",
-        "metal-tools-build-amd",
-        "metal-tools-build-globals",
-        "metal-tools-build-jquery",
-        "metal-tools-soy",
-        "require-dir",
-        "stream-consume",
-        "vinyl-fs",
-        "yargs"
-    ]
+  "name": "metal-cli",
+  "version": "1.1.0",
+  "description": "Command line tools for metal (e.g. build)",
+  "license": "BSD",
+  "repository": "metal/metal-cli",
+  "author": {
+    "name": "Maira Bello",
+    "email": "maira.araujo@liferay.com"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "bin": {
+    "metal": "./index.js"
+  },
+  "scripts": {
+    "lint": "jshint index.js",
+    "test": "mocha test/*.js --slow 1000 --timeout 5000"
+  },
+  "keywords": [
+    "cli",
+    "metal"
+  ],
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "glob-watcher": "^2.0.0",
+    "merge": "^1.2.0",
+    "metal-tools-build-amd": "^3.0.0",
+    "metal-tools-build-globals": "^2.0.0",
+    "metal-tools-build-jquery": "^2.0.0",
+    "metal-tools-soy": "^2.0.0",
+    "require-dir": "^0.3.0",
+    "stream-consume": "^0.1.0",
+    "vinyl-fs": "^2.2.1",
+    "yargs": "^3.30.0"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "jshint": "^2.7.0",
+    "mocha": "^2.2.5",
+    "sinon": "^1.14.1"
+  },
+  "bundledDependencies": [
+    "chalk",
+    "glob-watcher",
+    "merge",
+    "metal-tools-build-amd",
+    "metal-tools-build-globals",
+    "metal-tools-build-jquery",
+    "metal-tools-soy",
+    "require-dir",
+    "stream-consume",
+    "vinyl-fs",
+    "yargs"
+  ]
 }
