@@ -10,12 +10,20 @@ requireDir('./lib/commands', {recurse: true});
 
 var command = Command.get();
 if (command) {
+	var args = Command.getArgv();
+	stubConsole(args);
   console.info('Running ' + chalk.cyan('\'' + command.name + '\'') + '...');
-  command.run(Command.getArgv(), function() {
+  command.run(args, function() {
     console.info('Finished ' + chalk.cyan('\'' + command.name + '\'') + '...');
     process.exit(0);
   });
 } else {
-  console.warn(chalk.red('Error: ') + 'Invalid command ' + chalk.cyan('\'' + Command.getName() + '\''));
+  console.error(chalk.red('Error: ') + 'Invalid command ' + chalk.cyan('\'' + Command.getName() + '\''));
   process.exit(1);
+}
+
+function stubConsole(args) {
+	if (args.logLevel === 'silent') {
+		console.warn = function() {};
+	}
 }
