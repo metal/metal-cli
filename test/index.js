@@ -200,6 +200,19 @@ describe('Metal CLI', function() {
         done();
       });
     });
+
+    it('should exit with error when soy finishes with error', function(done) {
+      runMetal([
+        'soy',
+        '-s',
+        'test/fixtures/src/**/compileError.soy',
+        '-d',
+        'test/fixtures/src'
+      ]).on('close', function(code) {
+        assert.strictEqual(1, code);
+        done();
+      });
+    });
   });
 });
 
