@@ -27,7 +27,7 @@ describe('Metal CLI', function() {
       runMetal([
         'soy',
         '-s',
-        'test/fixtures/src/**/*.soy',
+        'test/fixtures/src/**/Foo.soy',
         '-d',
         'test/fixtures/src'
       ]).on('close', function(code) {
@@ -166,7 +166,7 @@ describe('Metal CLI', function() {
         '--dest',
         'test/fixtures/build/globals',
         '--soySrc',
-        'test/fixtures/src/**/*.soy',
+        'test/fixtures/src/**/Foo.soy',
         '--soyDest',
         'test/fixtures/src'
       ]).on('close', function(code) {
@@ -187,7 +187,7 @@ describe('Metal CLI', function() {
         '--dest',
         'test/fixtures/build/globals',
         '--soySrc',
-        'test/fixtures/src/**/*.soy',
+        'test/fixtures/src/**/Foo.soy',
         '--soyDest',
         'test/fixtures/src',
         '--soySkipMetalGeneration'
