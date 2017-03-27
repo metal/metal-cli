@@ -13,9 +13,14 @@ if (command) {
 	var args = Command.getArgv();
 	stubConsole(args);
   console.info('Running ' + chalk.cyan('\'' + command.name + '\'') + '...');
-  command.run(args, function() {
-    console.info('Finished ' + chalk.cyan('\'' + command.name + '\'') + '...');
-    process.exit(0);
+  command.run(args, function(err) {
+    if (err) {
+      console.error(err.toString());
+      process.exit(1);
+    } else {
+      console.info('Finished ' + chalk.cyan('\'' + command.name + '\'') + '...');
+      process.exit(0);
+    }
   });
 } else {
   console.error(chalk.red('Error: ') + 'Invalid command ' + chalk.cyan('\'' + Command.getName() + '\''));
