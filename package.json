@@ -1,6 +1,6 @@
 {
   "name": "metal-cli",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Command line tools for metal (e.g. build)",
   "license": "BSD",
   "repository": "metal/metal-cli",
@@ -29,7 +29,7 @@
     "metal-tools-build-amd": "^3.0.0",
     "metal-tools-build-globals": "^2.0.0",
     "metal-tools-build-jquery": "^2.0.0",
-    "metal-tools-soy": "^3.0.0",
+    "metal-tools-soy": "^4.0.0",
     "require-dir": "^0.3.0",
     "stream-consume": "^0.1.0",
     "vinyl-fs": "^2.2.1",
