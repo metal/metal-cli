@@ -192,6 +192,29 @@ describe('Metal CLI', function() {
       });
     });
 
+    it('should replace extracted external messages with the provided pattern', function(done) {
+      runMetal([
+        'build',
+        '--src',
+        'test/fixtures/src/**/*.js',
+        '--dest',
+        'test/fixtures/build/globals',
+				'--externalMsgFormat',
+				'I18n.translate(\'$2\')',
+        '--soySrc',
+        'test/fixtures/src/**/Message.soy',
+        '--soyDest',
+        'test/fixtures/src'
+      ]).on('close', function(code) {
+        assert.strictEqual(0, code);
+        assert.ok(fs.existsSync('test/fixtures/src/Message.soy.js'));
+
+        var contents = fs.readFileSync('test/fixtures/src/Message.soy.js', 'utf8');
+        assert.notStrictEqual(-1, contents.indexOf('I18n.translate(\'message-key\')'));
+        done();
+      });
+    });
+
     it('should build soy files without generating component when soySkipMetalGeneration is passed', function(done) {
       runMetal([
         'build',
