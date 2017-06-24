@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "chalk": "^1.1.1",
-    "glob-watcher": "^2.0.0",
+    "glob-watcher": "^3.0.0",
     "merge": "^1.2.0",
     "metal-tools-build-amd": "^3.0.0",
     "metal-tools-build-globals": "^2.0.0",
